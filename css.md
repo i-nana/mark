@@ -49,3 +49,16 @@ text-justify:inter-ideogra;		/* IE */
 	-webkit-user-modify:read-write-plaintext-only;
 }
 ```
+
+7. ios transition translate 闪屏问题
+
+当translate使用2d而非3d的呈现方式时，我们要设置当前动画移动元素的呈现方式为3d，它的所有子元素背面隐藏
+
+``` css
+.css{
+	/*设置内嵌的元素在 3D 空间如何呈现：保留 3D*/
+	-webkit-transform-style: preserve-3d;
+	/*（设置进行转换的元素的背面在面对用户时是否可见：隐藏）*/
+	-webkit-backface-visibility: hidden;
+}
+```
