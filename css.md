@@ -7,7 +7,13 @@ input:-webkit-autofill {
 }
 ```
 
-2. 去掉input button 点击时的边框
+或者，关闭 自动填充
+
+```
+autocomplete="off"
+```
+
+2. 去掉input button 焦点或点击时蓝色边框 & 点击高亮
 
 ``` css
 input[type="button"], input[type="submit"], input[type="reset"], button {
@@ -15,7 +21,17 @@ input[type="button"], input[type="submit"], input[type="reset"], button {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-tap-highlight-color: transparent;		/* For some Androids */
 }
+/* 边框 */
+input{
+	outline:none;
+}
 
+```
+
+在移动端IE10上，需要如下代码才能去除
+
+``` html
+<meta name="msapplication-tap-highlight" content="no" />
 ```
 
 3. 文字两端对齐
@@ -61,4 +77,70 @@ text-justify:inter-ideogra;		/* IE */
 	/*（设置进行转换的元素的背面在面对用户时是否可见：隐藏）*/
 	-webkit-backface-visibility: hidden;
 }
+```
+
+8. placeholder占位符颜色自定义
+
+``` css
+input:-moz-placeholder {
+	color: #369;
+}
+::-webkit-input-placeholder {
+	color:#369;
+}
+```
+
+9. 禁止选中文本
+
+``` css
+-moz-user-select:none;
+-webkit-user-select:none;
+-ms-user-select:none;
+user-select:none;
+```
+
+10. 屏蔽苹果浏览器对数字的识别
+
+``` html
+<meta content="telephone=no" name="format-detection">
+```
+
+11. HTML5 input在type="number"时的上下小箭头
+
+``` css
+/* Chrome */
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
+	-webkit-appearance: none !important;
+	margin: 0; 
+}
+/* Firefox */
+input[type="number"]{
+	-moz-appearance:textfield;
+}
+```
+
+12. 判断手机横竖屏
+
+* css
+
+``` css
+@media screen and (orientation: portrait) {
+  /*竖屏 css*/
+} 
+@media screen and (orientation: landscape) {
+  /*横屏 css*/
+}
+```
+
+* js
+
+``` js
+window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+	if (window.orientation === 180 || window.orientation === 0) { 
+		alert('竖屏状态！');
+	} 
+	if (window.orientation === 90 || window.orientation === -90 ){ 
+		alert('横屏状态！');
+	}  
+}, false); 
 ```
